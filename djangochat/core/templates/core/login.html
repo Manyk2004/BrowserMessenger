@@ -1,0 +1,35 @@
+{% extends 'core/base.html' %}
+
+{% block title %} Log in {% endblock %}
+{% block title2 %} Log in {% endblock %}
+{% block content %}
+<nav class="flex items-center justify-between px-4 py-6 bg-teal-800">
+    <div>
+        <a href="/" class="text-xl text-white">Log in</a>
+    </div>
+</nav>
+
+<form method="post" action="." class="lg:w-1/4 px-4 mx-auto">
+    {% csrf_token %}
+    <div class="mb-5">
+        <label class="text-white">Username</label>
+        <input type="text" name="username" class="w-full mt-2 px-4 py-5 rounded-xl">
+    </div>
+    <div class="mb-5">
+        <label class="text-white">Password</label>
+        <input type="password" name="password" class="w-full mt-2 px-4 py-5 rounded-xl">
+    </div>
+    {% if form.errors %}
+        {% for field in forms %}
+            {% for errors in field.errors %}
+                <div>
+                    <p> 
+                        {{error|escape}}
+                    </p>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+    <button>Log in</button>
+</form>
+{% endblock %}
